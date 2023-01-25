@@ -49,7 +49,7 @@
           </div>
           <Svelecte
             creatablePrefix=""
-            fetch="http://127.0.0.1:5173/api/tags"
+            fetch="https://monsterindex.duckdns.org/api/tags"
             selectOnTab
             creatable
             on:createoption={(e)=>created_tags.push(e.detail.name)}

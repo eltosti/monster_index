@@ -36,7 +36,7 @@
       </div>
       <div class="flex gap-0.5">
         <form class="grow" on:submit|preventDefault={()=>{MonsterList.add_tag(selection.name, "positive")}}>
-          <Svelecte fetch="http://127.0.0.1:5173/api/tags"
+          <Svelecte fetch="https://monsterindex.duckdns.org/api/tags"
                     selectOnTab
                     on:change={()=>{MonsterList.add_tag(selection.name, "positive")}}
                     bind:readSelection={selection}
