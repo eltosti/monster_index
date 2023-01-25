@@ -14,7 +14,7 @@
   }
 
   const handleSubmit = async () => {
-    let tmp = await fetch("http://127.0.0.1:5173/api/addMonster",{
+    let tmp = await fetch("https://monsterindex.duckdns.org/api/addMonster",{
       method: 'POST',
       body: JSON.stringify({monster : {...monster, tags: [...monster_tags]}, created_tags }),
       headers: {

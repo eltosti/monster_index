@@ -7,7 +7,7 @@
   import Tag from "$lib/tag.svelte";
 
   onMount(async () => {
-    let test = await fetch("http://127.0.0.1:5173/api/monsters");
+    let test = await fetch("https://monsterindex.duckdns.org/api/monsters");
     let data = await test.json();
     MonsterList.set_monsters(await data);
   });
