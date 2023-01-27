@@ -12,7 +12,7 @@ async function gettest(){
   monsterref.forEach((doc)=> {
     let doc_dat = doc.data()
     if (doc_dat.type == "tags"){
-      test = test.concat(doc_dat.tags.map(a => ({"name": a})))
+      test = test.concat(doc_dat.tags.sort().map(a => ({"name": a})))
     }
   })
   return test
@@ -24,5 +24,5 @@ export async function GET() {
   let a = {}
   a = await gettest()
 
-  return json(a.sort((a,b) => a.name - b.name))
+  return json(a)
 }
