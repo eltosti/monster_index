@@ -23,5 +23,6 @@ export async function GET() {
 
   let a = {}
   a = await gettest()
-  return json(a.sort())
+
+  return json(a.sort((a,b) => a.name - b.name))
 }
