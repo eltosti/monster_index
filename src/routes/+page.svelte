@@ -11,7 +11,7 @@
   const getMonster = `${PUBLIC_SEVER_URL}/api/monsters`
   const getTags = `${PUBLIC_SEVER_URL}/api/tags`
 
-    console.log(getMonster)
+  console.log(getMonster)
 
   onMount(async () => {
     let test = await fetch(getMonster);
