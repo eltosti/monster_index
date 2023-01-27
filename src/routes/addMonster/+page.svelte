@@ -2,6 +2,11 @@
   import Svelecte from "svelecte";
   import Tag from "$lib/tag.svelte";
   import { TextInput, Textarea, Button } from "@specialdoom/proi-ui";
+  import {PUBLIC_SEVER_URL} from "$env/static/public"
+
+  const addMonster = `${PUBLIC_SEVER_URL}/api/addMonster`
+  const getTags = `${PUBLIC_SEVER_URL}/api/tags`
+
 
   let monster_tags = new Set();
   let created_tags = [];
@@ -14,7 +19,7 @@
   }
 
   const handleSubmit = async () => {
-    let tmp = await fetch("https://monsterindex.duckdns.org/api/addMonster",{
+    let tmp = await fetch(addMonster,{
       method: 'POST',
       body: JSON.stringify({monster : {...monster, tags: [...monster_tags]}, created_tags }),
       headers: {
@@ -49,7 +54,7 @@
           </div>
           <Svelecte
             creatablePrefix=""
-            fetch="https://monsterindex.duckdns.org/api/tags"
+            fetch={getTags}
             selectOnTab
             creatable
             on:createoption={(e)=>created_tags.push(e.detail.name)}

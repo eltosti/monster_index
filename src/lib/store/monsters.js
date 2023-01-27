@@ -48,6 +48,7 @@ function MonsterList() {
       return state
     })),
     set_selected: (monster) => (update(state =>  ({ ...state, selected: monster }))),
+    set_filtered: (monsters) => (update(state =>  ({ ...state, filtered_monsters: monsters }))),
     set_monsters: (monsters) => (update(state =>  ({ ...state, all_monsters: monsters }))),
     update_name_search: (search) => (update(state => {
       state.name_search = new RegExp(search)

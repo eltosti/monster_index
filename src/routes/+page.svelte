@@ -5,11 +5,19 @@
   import { onMount } from "svelte";
   import MonsterList from "$lib/store/monsters";
   import Tag from "$lib/tag.svelte";
+  import { PUBLIC_SEVER_URL } from "$env/static/public";
+  import Monster from "../lib/Monster.svelte";
+
+  const getMonster = `${PUBLIC_SEVER_URL}/api/monsters`
+  const getTags = `${PUBLIC_SEVER_URL}/api/tags`
+
+    console.log(getMonster)
 
   onMount(async () => {
-    let test = await fetch("https://monsterindex.duckdns.org/api/monsters");
+    let test = await fetch(getMonster);
     let data = await test.json();
     MonsterList.set_monsters(await data);
+    MonsterList.set_filtered(await data)
   });
 
   $: filter_tags = [...$MonsterList.positive_tags].concat([...$MonsterList.negative_tags]);
@@ -25,7 +33,7 @@
 
 
 <section class="flex h-screen justify-center overflow-y-hidden p-5">
-  <div class="w-3/5 grid grid-cols-5 gap-2">
+  <div class="w-3/5 grid  md:grid-cols-1  lg:grid-cols-5 gap-2">
     <div class="col-span-2">
       <div class=" my-1 min-w-select">
         <TextInput placeholder="name regex" on:change={e => MonsterList.update_name_search(e.target.value)}/>
@@ -36,7 +44,7 @@
       </div>
       <div class="flex gap-0.5">
         <form class="grow" on:submit|preventDefault={()=>{MonsterList.add_tag(selection.name, "positive")}}>
-          <Svelecte fetch="https://monsterindex.duckdns.org/api/tags"
+          <Svelecte fetch={getTags}
                     selectOnTab
                     on:change={()=>{MonsterList.add_tag(selection.name, "positive")}}
                     bind:readSelection={selection}
@@ -49,7 +57,6 @@
         {#each filter_tags as ptags}
           <Tag name={ptags} delete_tag={() => MonsterList.remove_tag(ptags)}/>
         {/each}
-
       </div>
     </div>
     <div class=" col-span-1 overscroll-contain">
@@ -61,8 +68,7 @@
     </div>
     <div class=" col-span-2">
       <div>
-        <pre>{JSON.stringify($MonsterList.selected, null, 4)}</pre>
-
+        <Monster/>
       </div>
     </div>
   </div>
