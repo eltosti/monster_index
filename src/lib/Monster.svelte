@@ -10,7 +10,7 @@
 <div>
   {#if monster.tags}
     <p class="text-lg font-bold uppercase">{monster.name}</p>
-    <p class="text-lg  capitalize">{monster.description ? "description:" : ""} {monster.description}</p>
+    <p class="text-lg">{monster.description ? "Description:" : ""} {monster.description}</p>
     <div class="flex">
       {#if monster.tags}
         {#each monster.tags as tags}

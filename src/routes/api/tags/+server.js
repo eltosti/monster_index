@@ -11,7 +11,7 @@ async function gettest(){
   //console.log(monsterref.empty)
   monsterref.forEach((doc)=> {
     let doc_dat = doc.data()
-    if (doc_dat.type == "tags"){
+    if (doc_dat.type === "tags"){
       test = test.concat(doc_dat.tags.sort().map(a => ({"name": a})))
     }
   })
